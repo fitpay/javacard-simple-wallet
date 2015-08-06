@@ -2,7 +2,7 @@
 
 This is a simple wallet simply maintains a running account balance allowing you to credit, debit, or review the current balance of the wallet.   This is simply for pure demonstration on various wearable technologies where a javacard secure element is available.
 
-A very simple [wallet client](src/main/java/fitpay/javacard/simplewallet/SimplWalletClient.java) has been created to show a simple interaction with the wallet.
+A very simple [wallet client](src/main/java/fitpay/javacard/simplewallet/SimpleWalletClient.java) has been created to show a simple interaction with the wallet.
 
 ## Installation
 
