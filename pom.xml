@@ -1,0 +1,104 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>fitpay</groupId>
+    <artifactId>javacard-simple-wallet</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <properties>
+        <jc.home>${project.basedir}/java_card_kit-2_2_2-rr-bin-linux-do</jc.home>
+        <javacard.package.name>fitpay.javacard.simplewallet</javacard.package.name>
+        <javacard.package.aid>0xF0:0x00:0xA0:0x00:0x0E:0x00:0x01</javacard.package.aid>
+        <javacard.applet.aid>0xF0:0x00:0xA0:0x00:0x0E:0x00</javacard.applet.aid>
+        <javacard.applet.name>SimpleWalletApplet</javacard.applet.name>
+        <javacard.major.version>1</javacard.major.version>
+        <javacard.minor.version>0</javacard.minor.version>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <!-- anything above 1.5 will cause the cap file creation 
+                        to fail -->
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <!-- Convert to cap file -->
+                <configuration>
+                    <tasks>
+                        <echo message="Converting to CAP file" />
+                        <java classname="com.sun.javacard.converter.Converter"
+                            failonerror="true" fork="true">
+                            <arg value="-verbose" />
+                            <arg value="-classdir" />
+                            <arg value="target/classes/" />
+                            <arg value="-applet" />
+                            <arg value="${javacard.applet.aid}" />
+                            <arg value="${javacard.applet.name}" />
+                            <arg value="${javacard.package.name}" />
+                            <arg value="${javacard.package.aid}" />
+                            <arg
+                                value="${javacard.major.version}.${javacard.minor.version}" />
+                            <arg value="-nowarn" />
+                            <classpath>
+                                <pathelement
+                                    location="${jc.home}/api_export_files" />
+                                <pathelement location="${jc.home}/lib/apduio.jar" />
+                                <pathelement
+                                    location="${jc.home}/lib/apdutool.jar" />
+                                <pathelement location="${jc.home}/lib/jcwde.jar" />
+                                <pathelement
+                                    location="${jc.home}/lib/converter.jar" />
+                                <pathelement
+                                    location="${jc.home}/lib/scriptgen.jar" />
+                                <pathelement
+                                    location="${jc.home}/lib/offcardverifier.jar" />
+                                <pathelement
+                                    location="${jc.home}/lib/capdump.jar" />
+                            </classpath>
+                        </java>
+                        <copy todir="target/">
+                            <flattenmapper />
+                            <fileset dir="target/classes/">
+                                <include name="**/*.cap" />
+                            </fileset>
+                        </copy>
+                    </tasks>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>com.licel</groupId>
+            <artifactId>jcardsim</artifactId>
+            <version>3.0.4-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.jnasmartcardio</groupId>
+            <artifactId>jnasmartcardio</artifactId>
+            <version>0.2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

@@ -1,0 +1,47 @@
+#!/bin/sh
+#
+# Copyright 2005 Sun Microsystems, Inc. All rights reserved.
+# Use is subject to license terms.
+#
+
+if [ "$JAVA_HOME" = "" ]; then
+  echo Set environment variable JAVA_HOME
+  exit
+fi
+
+if [ "$JC_HOME" = "" ]; then
+  echo Set environment variable JC_HOME
+  exit
+fi
+
+SCR_FILE="TransitDemo-TransientKey.scr"
+if [ $# -gt 0 -a "$1" -eq "-n" ]; then
+    SCR_FILE="TransitDemo-NoTransientKey.scr"
+fi
+
+echo "Issue the transit card (Initialize the transit card: load and create the transit applet)"
+$JC_HOME/bin/cref -o TransitCard >&2 &
+sleep 5
+$JC_HOME/bin/apdutool $SCR_FILE
+
+echo "Credit the transit card account at a POS terminal"
+$JC_HOME/bin/cref -i TransitCard -o TransitCard >&2 &
+sleep 5
+sh POSTerminal -k FFFFFFFFFFFFFFFF -- VERIFY 12345 CREDIT 99 GET_BALANCE
+
+echo "Enter the transit system"
+$JC_HOME/bin/cref -i TransitCard -o TransitCard >&2 &
+sleep 5
+sh TransitTerminal -k FFFFFFFFFFFFFFFF -- PROCESS_ENTRY 999
+
+echo "Exit the transit system"
+$JC_HOME/bin/cref -i TransitCard -o TransitCard >&2 &
+sleep 5
+sh TransitTerminal -k FFFFFFFFFFFFFFFF -- PROCESS_EXIT 10
+
+echo "Check the balance at a POS termminal"
+$JC_HOME/bin/cref -i TransitCard -o TransitCard >&2 &
+sleep 5
+sh POSTerminal -k FFFFFFFFFFFFFFFF -- VERIFY 12345 GET_BALANCE
+
+rm -f TransitCard

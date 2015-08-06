@@ -1,0 +1,30 @@
+#!/bin/sh
+#
+# Copyright 2005 Sun Microsystems, Inc. All rights reserved.
+# Use is subject to license terms.
+#
+
+# Workfile:@(#)build_samples.sh	1.44
+# Version:1.44
+# Modified:01/03/06 19:01:01 
+
+ if [ "$JAVA_HOME" = "" ]; then
+  echo Set environment variable JAVA_HOME
+  exit 1
+ fi
+
+ if [ "$1" = "help" -o "$1" = "-help" ]; then
+    ant samples_usage
+    exit
+ fi
+
+ if [ "$1" = "clean" -o "$1" = "-clean" ]; then
+    ant clean
+    exit
+ fi
+
+ ant build_samples
+ 
+ exit
+
+

@@ -1,0 +1,26 @@
+#!/bin/sh
+#
+# Copyright 2005 Sun Microsystems, Inc. All rights reserved.
+# Use is subject to license terms.
+#
+
+if [ "$JAVA_HOME" = "" ]; then
+  echo Set environment variable JAVA_HOME
+  exit
+fi
+
+if [ "$JC_HOME" = "" ]; then
+  echo Set environment variable JC_HOME
+  exit
+fi
+
+echo "This demo requires a cref with com.sun.javacard.samples.transit applet" 
+echo "installed"
+
+echo "Start cref before running this demo"
+
+JC_PATH=$JC_HOME/lib/apduio.jar:$JC_HOME/lib/base-core.jar:$JC_HOME/lib/base-opt.jar:$JC_HOME/lib/jcrmiclientframework.jar:$JC_HOME/lib/jcclientsamples.jar:$JC_HOME/lib/apduio.jar:$JC_HOME/samples/classes:$CLASSPATH
+
+
+JFLAGS="-classpath $JC_PATH"
+$JAVA_HOME/bin/java $JFLAGS com.sun.javacard.clientsamples.transit.POSTerminal "$@"
