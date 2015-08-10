@@ -1,4 +1,4 @@
-package fitpay.javacard.simplewallet;
+package fitpay.javacard.simplewallet.applet;
 
 import javacard.framework.APDU;
 import javacard.framework.Applet;

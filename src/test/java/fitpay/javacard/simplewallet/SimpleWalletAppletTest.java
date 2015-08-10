@@ -17,6 +17,8 @@ import com.licel.jcardsim.smartcardio.CardSimulator;
 import com.licel.jcardsim.utils.AIDUtil;
 import com.licel.jcardsim.utils.ByteUtil;
 
+import fitpay.javacard.simplewallet.applet.SimpleWalletApplet;
+
 @SuppressWarnings("restriction")
 public class SimpleWalletAppletTest {
 

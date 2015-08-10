@@ -6,7 +6,7 @@
     <version>1.0.0-SNAPSHOT</version>
     <properties>
         <jc.home>${project.basedir}/java_card_kit-2_2_2-rr-bin-linux-do</jc.home>
-        <javacard.package.name>fitpay.javacard.simplewallet</javacard.package.name>
+        <javacard.package.name>fitpay.javacard.simplewallet.applet</javacard.package.name>
         <javacard.package.aid>0xF0:0x00:0xA0:0x00:0x0E:0x00:0x01</javacard.package.aid>
         <javacard.applet.aid>0xF0:0x00:0xA0:0x00:0x0E:0x00</javacard.applet.aid>
         <javacard.applet.name>SimpleWalletApplet</javacard.applet.name>
