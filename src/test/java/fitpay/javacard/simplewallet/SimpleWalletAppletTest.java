@@ -23,6 +23,7 @@ import fitpay.javacard.simplewallet.applet.SimpleWalletApplet;
 public class SimpleWalletAppletTest {
 
     private CardSimulator simulator;
+
     private AID aid = AIDUtil.create("FITPAYRULEZ!");
     
     @Before
@@ -30,8 +31,8 @@ public class SimpleWalletAppletTest {
         simulator = new CardSimulator();
         simulator.installApplet(aid, SimpleWalletApplet.class);
         simulator.selectApplet(aid);
-        
-        System.out.println("AID: " + ByteUtil.hexString(Hex.decode("FITPAYRULEZ!")));
+
+        //System.out.println(String.format("AID: %s", ByteUtil.hexString(aid.getBytes())));
         System.out.println("SELECT APDU: " + ByteUtil.hexString(AIDUtil.select(aid)));
         toggleDebug();
     }

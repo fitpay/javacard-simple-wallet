@@ -1,5 +1,7 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>fitpay</groupId>
     <artifactId>javacard-simple-wallet</artifactId>
@@ -88,11 +90,18 @@
             <groupId>com.licel</groupId>
             <artifactId>jcardsim</artifactId>
             <version>3.0.4-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/jcardsim/jcardsim-3.0.4-SNAPSHOT.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>io.github.jnasmartcardio</groupId>
             <artifactId>jnasmartcardio</artifactId>
-            <version>0.2.5</version>
+            <version>0.2.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.58</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -101,4 +110,10 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>http://central.maven.org/maven2/</url>
+        </repository>
+    </repositories>
 </project>

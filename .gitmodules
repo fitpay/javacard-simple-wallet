@@ -1,0 +1,3 @@
+[submodule "jcardsim"]
+	path = jcardsim
+	url = https://github.com/licel/jcardsim
