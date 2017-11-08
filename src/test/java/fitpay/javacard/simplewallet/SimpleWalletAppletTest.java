@@ -9,7 +9,7 @@ import javacard.framework.AID;
 import javax.smartcardio.CommandAPDU;
 import javax.smartcardio.ResponseAPDU;
 
-import org.bouncycastle.util.encoders.Hex;
+import com.licel.jcardsim.bouncycastle.util.encoders.Hex;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,7 +32,7 @@ public class SimpleWalletAppletTest {
         simulator.installApplet(aid, SimpleWalletApplet.class);
         simulator.selectApplet(aid);
 
-        //System.out.println(String.format("AID: %s", ByteUtil.hexString(aid.getBytes())));
+        System.out.println("AID: " + ByteUtil.hexString(Hex.decode("FITPAYRULEZ!")));
         System.out.println("SELECT APDU: " + ByteUtil.hexString(AIDUtil.select(aid)));
         toggleDebug();
     }
