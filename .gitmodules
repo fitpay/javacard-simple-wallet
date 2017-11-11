@@ -1,0 +1,6 @@
+[submodule "jcardsim"]
+	path = repos/jcardsim
+	url = https://github.com/licel/jcardsim
+[submodule "repos/oracle_javacard_sdks"]
+	path = repos/oracle_javacard_sdks
+	url = https://github.com/martinpaljak/oracle_javacard_sdks
